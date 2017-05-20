@@ -1,9 +1,9 @@
-#!/usr/bin/bash
+#!/bin/bash
 
-URGENT_VALUE=25
-PACKAGE_COUNT=$(pacman -Qu | wc -l)
+URGENT_VALUE=5
+PACKAGE_COUNT=$(eopkg lu | wc -l)
 
-if [[ "${PACKAGE_COUNT}" -gt 0 ]]; then
+if [[ "${PACKAGE_COUNT}" -gt 1 ]]; then
   echo "${PACKAGE_COUNT}" # full-text
   echo "${PACKAGE_COUNT}" # short-text
   echo ""
