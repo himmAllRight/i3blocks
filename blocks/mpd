@@ -1,0 +1,24 @@
+#!/bin/bash
+# Based on https://aur.archlinux.org/packages/playerctl/
+
+ICON_PLAY="➤"
+ICON_PAUSE="Ⅱ"
+ICON_STOP="≠"
+CUR_ICON=""
+
+MPC_LINES=$(mpc status | wc -l)
+SONG_INFO=$(mpc status | head -n 1)
+PLAYER_STATUS=$(mpc status | sed -n '2p' | awk '{print $1}' | tr -d "["| tr -d "]")
+
+if [[ "${PLAYER_STATUS}" = "paused" ]]; then
+  CUR_ICON="${ICON_PAUSE}"
+elif [[ "${PLAYER_STATUS}" = "playing" ]]; then
+  CUR_ICON="${ICON_PLAY}"
+else
+  CUR_ICON="${ICON_STOP}"
+fi
+
+if [[ "${MPC_LINES}" -gt 1 ]] &&  [[ "${SONG_INFO}" != "" ]]; then
+  echo "${SONG_INFO} ${CUR_ICON}"
+  echo "${SONG_INFO} ${CUR_ICON}"
+fi
