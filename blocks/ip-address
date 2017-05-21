@@ -1,6 +1,7 @@
 #!/bin/bash
 
-IP_ADDRESS=$(ip route get 1 | awk '{print $NF;exit}')
+INSTANCE="${BLOCK_INSTANCE}"
+IP_ADDRESS= ifconfig "${INSTANCE}" | awk '/inet addr/ {gsub("addr:", "", $2); print $2}'
 
 if [[ "${IP_ADDRESS}" != "" ]]; then
   echo "${IP_ADDRESS}"
